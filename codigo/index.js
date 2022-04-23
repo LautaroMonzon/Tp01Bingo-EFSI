@@ -1,12 +1,11 @@
 import { randomizar } from "./randomizar.js";
 import express from "express";
-import { application } from "express";
 const app = express();
 const PORT = 3000;
 
 app.use(express.json());
 	
-app.post("/numero_aleatorio", function (req, res) {
+app.post("/", function (req, res) {
 	const numMinimo = 1;
     const numMaximo = 10;
     let numero_aleatorio = [];
@@ -20,6 +19,8 @@ app.post("/numero_aleatorio", function (req, res) {
 
 app.post("/iniciar_juego", function (req, res) {
     const numCartones = 3;
+    
+
     res.send("El número de cartones es: " + numero_aleatorio);
 });
 
