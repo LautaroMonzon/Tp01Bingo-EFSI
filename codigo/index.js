@@ -1,31 +1,35 @@
-import { randomizar } from "./randomizar.js";
+import { randomizar, crearCartones } from "./funciones.js";
 import express from "express";
 const app = express();
 const PORT = 3000;
 
 app.use(express.json());
 	
-app.post("/", function (req, res) {
-	const numMinimo = 1;
-    const numMaximo = 10;
-    let numero_aleatorio = [];
-    numero_aleatorio = randomizar(numMinimo, numMaximo, numero_aleatorio);
-    
-    console.log(req.body);
-	// res.end();
-    let arrayAMostrar = ["El número random entre y 10 es: ", numero_aleatorio]
-    res.send(arrayAMostrar);
+app.post("/numero_aleatorio", function (req, res) {
+	const max = parseInt(req.body.valor);
+
+	if (isNaN(max)) {
+		res.status(400).send("Valor incorrecto");
+		return;
+	}
+
+	res.status(200).json({ resultado: randomizar(req.body.valor) });
 });
 
 app.post("/iniciar_juego", function (req, res) {
-    const numCartones = 3;
-    
+	const cantidadCartones = parseInt(req.body.valor);
 
-    res.send("El número de cartones es: " + numero_aleatorio);
+	if (isNaN(cantidadCartones)) {
+		res.status(400).send("Valor incorrecto");
+		return;
+	}
+    crearCartones();
+
+	res.status(200).json({ resultado: cantidadCartones });
 });
 
-app.get("/mi_endpoint", function (req, res) {
-    res.send("respuesta");
+app.get("/obtener_carton", function (req, res) {
+    const cantidadCartones = parseInt(req.body.valor);
 });
 
 app.listen(PORT, function(err){
