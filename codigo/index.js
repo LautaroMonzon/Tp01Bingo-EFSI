@@ -12,7 +12,6 @@ app.post("/numero_aleatorio", function (req, res) {
 		res.status(400).send("Valor incorrecto");
 		return;
 	}
-
 	res.status(200).json({ resultado: randomizar(req.body.valor) });
 });
 

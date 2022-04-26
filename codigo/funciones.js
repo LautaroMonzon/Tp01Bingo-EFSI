@@ -1,6 +1,9 @@
+import { format } from "path";
+
 export function randomizar(max)
 {
-    numRandom = Math.random() * (max + min);
+    let numRandom = 0;
+    numRandom = Math.random() * (max + 1);
     numRandom = Math.floor(numRandom);
     return numRandom;
 }
@@ -8,12 +11,26 @@ export function randomizar(max)
 export function crearCartones(cantidad)
 {
     let cantidadCartones = [];
+    let contenidoCarton = [];
+    let cantidadNumeros = 0;
     let numRandom = 0;
     for(i=0; i<cantidad;i++)
     {
-        for(i=0; i<3;i++)
+        while(cantidadNumeros < 3)
         {
-            numRandom = randomizar(numRandom);
+            for(i = 0; i<3;i++)
+            {
+                numRandom = randomizar(numRandom);
+                if(numRandom !== contenidoCarton[i])
+                {
+                    validos++;
+                }else 
+                {
+                    validos = 0;  
+                    aleatorio = hacerRandom();
+                }
+            
+            }
         }
     }
 }
