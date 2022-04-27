@@ -8,29 +8,31 @@ export function randomizar(max)
     return numRandom;
 }
 
-export function crearCartones(cantidad)
+export function crearCartones(cantidadCartones, cantidadNumsEnCarton, numeroMax)
 {
-    let cantidadCartones = [];
-    let contenidoCarton = [];
-    let cantidadNumeros = 0;
+    let cartones = [];
     let numRandom = 0;
-    for(i=0; i<cantidad;i++)
+    for(let i=0; i<cantidadCartones;i++)//crear 3 cartones
     {
-        while(cantidadNumeros < 3)
+        let contenidoCarton = [];
+        for(let j=0;j<cantidadNumsEnCarton;j++) //pushea 3 numeros para carton
         {
-            for(i = 0; i<3;i++)
+            let cantNumsCorrectos = 0;
+            numRandom = randomizar(numeroMax);
+            while(cantNumsCorrectos < cantidadNumsEnCarton) //comprueba que cada numero sea diferente
             {
-                numRandom = randomizar(numRandom);
-                if(numRandom !== contenidoCarton[i])
+                if(numRandom !== contenidoCarton[cantNumsCorrectos])
                 {
-                    validos++;
-                }else 
+                    cantNumsCorrectos++;
+                }else
                 {
-                    validos = 0;  
-                    aleatorio = hacerRandom();
+                    cantNumsCorrectos = 0;  
+                    numRandom = randomizar(numeroMax);
                 }
-            
             }
+            contenidoCarton.push(numRandom); 
         }
+        cartones.push(contenidoCarton); 
     }
+    return cartones;
 }

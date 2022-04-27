@@ -4,7 +4,7 @@ const app = express();
 const PORT = 3000;
 
 app.use(express.json());
-	
+
 app.post("/numero_aleatorio", function (req, res) {
 	const max = parseInt(req.body.valor);
 
@@ -17,12 +17,15 @@ app.post("/numero_aleatorio", function (req, res) {
 
 app.post("/iniciar_juego", function (req, res) {
 	const cantidadCartones = parseInt(req.body.valor);
+	const cantidadNumsCarton = 3; //Cuantos valores va a tener el carton
+	const max = 10; //preguntarle a mate como sacar max del post de arriva
+	let cartones = [];
 
 	if (isNaN(cantidadCartones)) {
 		res.status(400).send("Valor incorrecto");
 		return;
 	}
-    crearCartones();
+    cartones = crearCartones(cantidadCartones, cantidadNumsCarton, max);
 
 	res.status(200).json({ resultado: cantidadCartones });
 });
