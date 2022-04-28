@@ -12,9 +12,11 @@ export function crearCartones(cantidadCartones, cantidadNumsEnCarton, numeroMax)
 {
     let cartones = [];
     let numRandom = 0;
+    let propietarioCarton = [];
     for(let i=0; i<cantidadCartones;i++)//crear 3 cartones
     {
         let contenidoCarton = [];
+        contenidoCarton.push("No hay propietario");
         for(let j=0;j<cantidadNumsEnCarton;j++) //pushea 3 numeros para carton
         {
             let cantNumsCorrectos = 0;
