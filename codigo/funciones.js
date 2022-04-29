@@ -12,11 +12,10 @@ export function crearCartones(cantidadCartones, cantidadNumsEnCarton, numeroMax)
 {
     let cartones = [];
     let numRandom = 0;
-    let propietarioCarton = [];
     for(let i=0; i<cantidadCartones;i++)//crear 3 cartones
     {
         let contenidoCarton = [];
-        contenidoCarton.push("No hay propietario");
+        contenidoCarton.push(null);
         for(let j=0;j<cantidadNumsEnCarton;j++) //pushea 3 numeros para carton
         {
             let cantNumsCorrectos = 0;
@@ -37,4 +36,22 @@ export function crearCartones(cantidadCartones, cantidadNumsEnCarton, numeroMax)
         cartones.push(contenidoCarton); 
     }
     return cartones;
+}
+
+export function asignarNombre(nombreUsuario, cartones)
+{
+    let cantidadCartonesConNombre = 0;
+    let hayEspacio = false;
+    for(let i = 0; i<cartones.length; i++)
+    {
+        if(cartones[i][0] === null)
+        {   
+            cantidadCartonesConNombre++;
+            return cartones[i][0] = nombreUsuario;
+            break;
+        }else if(cantidadCartonesConNombre === 3)
+        {
+            res.json({espacio: hayEspacio});
+        }
+    }
 }

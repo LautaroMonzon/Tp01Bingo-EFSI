@@ -1,4 +1,4 @@
-import { randomizar, crearCartones } from "./funciones.js";
+import { randomizar, crearCartones, asignarNombre } from "./funciones.js";
 import express from "express";
 const app = express();
 const PORT = 3000;
@@ -36,12 +36,20 @@ app.post("/iniciar_juego", function (req, res) {
 });
 
 app.get("/obtener_carton", function (req, res) {
-	const mensajeCarton = "Su cartón tiene los siguientes valores";
-    propietariosCarton.push(req.body.valor);
+	let nombreJugador = (req.body.valor);
+	cartones = asignarNombre(nombreJugador, cartones);
+	let cartonEnviado = [];
 
-	console.log(cartones[0]);
+	for(let i=0;i<cantidadCartones; i++)
+	{
+		if(cartones[i][0] == nombreJugador)
+		{
+			cartonEnviado = cartones[i];
+		}
+	}
+	console.log(cartonEnviado);
 
-	res.status(200).json({ mensajeCarton: mensajeCarton, carton1: cartones[0] });
+	res.status(200).json({cartonEnviado: cartonEnviado });
 });
 
 app.listen(PORT, function(err){
