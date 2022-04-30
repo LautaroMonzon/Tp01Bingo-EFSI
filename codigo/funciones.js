@@ -38,20 +38,15 @@ export function crearCartones(cantidadCartones, cantidadNumsEnCarton, numeroMax)
     return cartones;
 }
 
-export function asignarNombre(nombreUsuario, cartones)
+export function asignarNombre(nombreUsuario, cartones, cantidadCartones)
 {
-    let cantidadCartonesConNombre = 0;
-    let hayEspacio = false;
-    for(let i = 0; i<cartones.length; i++)
+    for(let i = 0; i<cantidadCartones; i++)
     {
         if(cartones[i][0] === null)
         {   
-            cantidadCartonesConNombre++;
-            return cartones[i][0] = nombreUsuario;
-            break;
-        }else if(cantidadCartonesConNombre === 3)
-        {
-            res.json({espacio: hayEspacio});
+            cartones[i][0] = nombreUsuario;
+            return cartones;
         }
+        console.log(i);
     }
 }

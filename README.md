@@ -8,11 +8,10 @@ POST numero_aleatorio que recibe un valor como parámetro y devuelve un número 
 
 POST iniciar_juego que crea los cartones, siendo la cantidad de los mismos el número pasado como parámetro. //LISTO
 
-///////////////
-GET obtener_carton que devuelve un array con los números del bingo, representando un cartón del mismo. El nombre del jugador se pasa como parámetro. //en proceso
-///////////////
+GET obtener_carton que devuelve un array con los números del bingo, representando un cartón del mismo. El nombre del jugador se pasa como parámetro. 
+//LISTO
 
-GET cartones Si no se le pasan parámetros (en la URL) devuelve todos los cartones del juego, si no devuelve el cartón pasado en la URL que fué creado con el endpoint obtener_carton.
+GET cartones Si no se le pasan parámetros (en la URL) devuelve todos los cartones del juego, si no devuelve el cartón pasado en la URL que fué creado con el endpoint obtener_carton. //LISTO
 
 GET sacar_numero que saca un número del bingo y marca los cartones que lo tienen.
 Dinámica del juego:
