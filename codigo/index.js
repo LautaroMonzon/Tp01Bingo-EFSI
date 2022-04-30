@@ -47,6 +47,7 @@ app.get("/obtener_carton", function (req, res) {
 			cartonEnviado = cartones[i];
 		}
 	}
+	cartonEnviado = cartones[0];
 	console.log(cartonEnviado);
 
 	res.status(200).json({cartonEnviado: cartonEnviado });

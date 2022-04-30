@@ -1,4 +1,4 @@
-//PROBAR server localhost:3000/numero_aleatorio
+//PROBAR server localhost:3000/iniciar_juego
 
 Bingo
 
