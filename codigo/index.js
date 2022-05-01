@@ -43,7 +43,17 @@ app.get("/obtener_carton", function (req, res) {
 		return;
 	}
 
-	nombreJugador = (req.body.valor);
+	nombreJugador = req.body.valor;
+
+	for(let i=0;i<cartones.length;i++)
+	{
+		if(nombreJugador === cartones[i][0])
+		{
+			res.status(400).send("Ese nombre ya está en uso");
+			return;
+		}
+	}
+
 	let cartonEnviado = [];
 	cartones = asignarNombre(nombreJugador, cartones, cantidadCartones);
 
@@ -59,7 +69,7 @@ app.get("/obtener_carton", function (req, res) {
 });
 
 app.get("/cartones", function (req, res) {
-	let respuesta = (req.body.valor);
+	let respuesta = req.body.valor;
 	if(respuesta === undefined)
 	{
 		res.status(200).json({cartones : cartones});
@@ -79,33 +89,53 @@ app.get("/cartones", function (req, res) {
 
 let borrarNombres = true;
 let cartonesComprobar = [];
+let seDecidioGanador = false;
+let cartonGanador;
 
 app.get("/sacar_numero", function (req, res) {
 	let numeroSacado = randomizar(maximo);
+	if(seDecidioGanador)
+	{
+		res.status(200).json({carton : cartonGanador});
+		return;
+	}
 
-	console.log(borrarNombres);
 	if(borrarNombres)
 	{ 
 		cartonesComprobar = [...cartones];
 		for(let i = 0;i<cantidadCartones;i++)
 		{
-			cartonesComprobar[i].splice(0, 1);
+			cartonesComprobar[i] = cartonesComprobar[i].slice(1);
+			//cartonesComprobar[i].splice(0, 1);
 		}
 		borrarNombres = false;
 	}
 	
 	for(let i = 0; i<cantidadCartones;i++)
 	{
+		let numsCorrectos = 0;
 		for(let j = 0;j<cartonesComprobar[0].length;j++)
 		{
-			if(numeroSacado === cartonesComprobar[i][j])
+			if(numeroSacado === cartonesComprobar[i][j]) //hace valores null
 			{
 				cartonesComprobar[i][j] = null;
+			}
+
+			if(cartonesComprobar[i][j] === null)
+			{
+				numsCorrectos++;
+			}
+			if(numsCorrectos === cartonesComprobar[0].length)
+			{
+				cartonGanador = cartones[i][0];
+				res.status(200).json({carton : cartonGanador});
+				seDecidioGanador = true;
+				return;
 			}
 		}
 	}
 
-	res.status(400).json({numeroSacado : numeroSacado});
+	res.status(200).json({numeroSacado : numeroSacado});
 	
 });
 
