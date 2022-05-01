@@ -47,6 +47,5 @@ export function asignarNombre(nombreUsuario, cartones, cantidadCartones)
             cartones[i][0] = nombreUsuario;
             return cartones;
         }
-        console.log(i);
     }
 }

@@ -68,15 +68,33 @@ app.get("/cartones", function (req, res) {
 	{
 		if(cartones[i][0] === respuesta)
 		{
-			res.status(200).json({cartones : cartones[i]});
+			res.status(200).json({carton : cartones[i]});
 		}
 	}
 	res.status(400).send("No hay ningún cartón con ese nombre");
 });
 
 app.get("/sacar_numero", function (req, res) {
-	let numeroSacado = randomizar(max);
+	let numeroSacado = randomizar(maximo);
+	let cartonesComprobar = [];
+	for(let i = 0;i<cantidadCartones;i++)
+	{
+		cartonesComprobar = cartones[i].slice(0);
+	}
+	console.log(cartonesComprobar);
+	
+	for(let i = 0; i<cantidadCartones;i++)
+	{
+		for(let j = 0;j<cartones[0].length;j++)
+		{
+			if(numeroSacado === cartones[i][j])
+			{
+				cartonesComprobar[i][j] = null;
+			}
+		}
+	}
 
+	res.status(400).json({numeroSacado : numeroSacado});
 	
 });
 
