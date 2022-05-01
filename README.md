@@ -1,5 +1,7 @@
 //PROBAR server localhost:3000/iniciar_juego
 
+//thunder client
+
 Bingo
 
 Crear un servidor API que represente el juego del Bingo. Debe tener los siguientes endpoints:
