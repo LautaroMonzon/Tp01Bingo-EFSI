@@ -12,7 +12,7 @@ export function elegirNumeros(valor)
 {
     if(valor )
     {
-
+        ///////Uso um switch
     }
 }
 
