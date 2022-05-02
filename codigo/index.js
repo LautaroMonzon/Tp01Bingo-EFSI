@@ -5,9 +5,9 @@ const PORT = 3000;
 
 //variables globales
 let cantidadCartones = 0;
-let cantidadNumsCarton = 3;//Cuantos valores va a tener el carton
+let cantidadNumsCarton = 15;//Cuantos valores va a tener el carton
 let cartones = [];
-const maximo = 10;
+const maximo = 100;
 let hayEspacio = 0;
 let nombreJugador;
 
@@ -20,7 +20,7 @@ app.post("/numero_aleatorio", function (req, res) {
 		res.status(400).send("Valor incorrecto");
 		return;
 	}
-	res.status(200).json({ resultado: randomizar(req.body.valor) });
+	res.status(200).json({ resultado: randomizar(max, 1) });
 });
 
 app.post("/iniciar_juego", function (req, res) {
@@ -61,7 +61,7 @@ app.get("/obtener_carton", function (req, res) {
 	{
 		if(cartones[i][0] == nombreJugador)
 		{
-			cartonEnviado = cartones[i];
+			cartonEnviado = cartones[i]; 
 		}
 	}
 	hayEspacio++;
@@ -93,7 +93,7 @@ let seDecidioGanador = false;
 let cartonGanador;
 
 app.get("/sacar_numero", function (req, res) {
-	let numeroSacado = randomizar(maximo);
+	let numeroSacado = randomizar(maximo, 1);
 	if(seDecidioGanador)
 	{
 		res.status(200).json({carton : cartonGanador});

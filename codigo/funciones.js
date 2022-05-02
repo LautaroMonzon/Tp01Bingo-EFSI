@@ -1,11 +1,19 @@
 import { format } from "path";
 
-export function randomizar(max)
+export function randomizar(max, min)
 {
     let numRandom = 0;
-    numRandom = Math.random() * (max + 1);
+    numRandom = Math.random() * (max + min);
     numRandom = Math.floor(numRandom);
     return numRandom;
+}
+
+export function elegirNumeros(valor)
+{
+    if(valor )
+    {
+
+    }
 }
 
 export function crearCartones(cantidadCartones, cantidadNumsEnCarton, numeroMax)
@@ -16,7 +24,7 @@ export function crearCartones(cantidadCartones, cantidadNumsEnCarton, numeroMax)
     {
         let contenidoCarton = [];
         contenidoCarton.push(null);
-        for(let j=0;j<cantidadNumsEnCarton;j++) //pushea 3 numeros para carton
+        for(let j=0;j<cantidadNumsEnCarton;j++) //pushea 15 numeros para carton
         {
             let cantNumsCorrectos = 0;
             numRandom = randomizar(numeroMax);
