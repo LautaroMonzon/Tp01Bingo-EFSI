@@ -20,7 +20,7 @@ app.post("/numero_aleatorio", function (req, res) {
 		res.status(400).send("Valor incorrecto");
 		return;
 	}
-	res.status(200).json({ resultado: randomizar(max, 1) });
+	res.status(200).json({ resultado: randomizar(0, max) });
 });
 
 app.post("/iniciar_juego", function (req, res) {
