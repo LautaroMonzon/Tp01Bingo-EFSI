@@ -105,8 +105,8 @@ app.get("/sacar_numero", function (req, res) {
 		cartonesComprobar = [...cartones];
 		for(let i = 0;i<cantidadCartones;i++)
 		{
-			cartonesComprobar[i] = cartonesComprobar[i].slice(1);
-			//cartonesComprobar[i].splice(0, 1);
+			//cartonesComprobar[i] = cartonesComprobar[i].slice(1);
+			cartonesComprobar[i].splice(0, 1);
 		}
 		borrarNombres = false;
 	}

@@ -55,22 +55,45 @@ export function elegirNumeros(valor)
 
 export function crearCartones(cantidadCartones, cantidadNumsEnCarton, numeroMax)
 {
-    let cartones = [];
-    let numRandom = 0;
-    for(let i=0; i<cantidadCartones;i++)//crear 3 cartones
+  let cartones = [];
+  for(let i=0; i<cantidadCartones;i++)//crear 3 cartones
+  {
+    let decimalesSacados = [true, true, true, true, true, true, true, true, true, true];
+    let contenidoCarton = [];
+    let numeroSacado = 0;
+    contenidoCarton.push(null);
+    for(let j=0;j<10;j++) //pushea los primeros 10 numeros para carton (1 de cada decena)
     {
-        let contenidoCarton = [];
-        contenidoCarton.push(null);
-        for(let j=0;j<cantidadNumsEnCarton;j++) //pushea 15 numeros para carton
-        {
-            contenidoCarton.push(randomizar(j));
-            
-            
-            contenidoCarton.push(numRandom); 
-        }
-        cartones.push(contenidoCarton); 
+      contenidoCarton.push(elegirNumeros(j));
     }
-    return cartones;
+    let completo=0;
+    let k=0;
+    while(completo!==5)
+    {
+      k++;
+      if((Math.random() > 0.5) === true)
+      {
+        if(decimalesSacados[k])
+        {
+          decimalesSacados[k]=false;
+          numeroSacado = elegirNumeros(k);
+          for(let l=0;l<contenidoCarton.length;l++)
+          {
+            if(numeroSacado === contenidoCarton[l])
+            {
+              numeroSacado = elegirNumeros(k);
+              l=-1;
+            }
+          }
+          contenidoCarton.push(numeroSacado);
+          completo++;
+        }
+      }
+      if(k===9)k=-1;
+    }
+    cartones.push(contenidoCarton); 
+  }
+  return cartones;
 }
 
 export function asignarNombre(nombreUsuario, cartones, cantidadCartones)
