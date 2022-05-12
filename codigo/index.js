@@ -44,7 +44,6 @@ app.get("/obtener_carton", function (req, res) {
 	}
 
 	nombreJugador = req.body.valor;
-
 	for(let i=0;i<cartones.length;i++)
 	{
 		if(nombreJugador === cartones[i][0])
@@ -105,8 +104,8 @@ app.get("/sacar_numero", function (req, res) {
 		cartonesComprobar = [...cartones];
 		for(let i = 0;i<cantidadCartones;i++)
 		{
-			//cartonesComprobar[i] = cartonesComprobar[i].slice(1);
-			cartonesComprobar[i].splice(0, 1);
+			cartonesComprobar[i] = cartonesComprobar[i].slice(1);
+			//cartonesComprobar[i].splice(0, 1);
 		}
 		borrarNombres = false;
 	}
@@ -134,10 +133,58 @@ app.get("/sacar_numero", function (req, res) {
 			}
 		}
 	}
-
 	res.status(200).json({numeroSacado : numeroSacado});
 	
 });
+
+app.get("/jugar_continuo", function (req, res) {
+	if(seDecidioGanador)
+	{
+		res.status(200).json({carton : cartonGanador});
+		return;
+	}
+
+	if(borrarNombres)
+	{ 
+		cartonesComprobar = [...cartones];
+		for(let i = 0;i<cantidadCartones;i++)
+		{
+			cartonesComprobar[i] = cartonesComprobar[i].slice(1);
+			// cartonesComprobar[i].splice(0, 1);
+		}
+		borrarNombres = false;
+	}
+	while (seDecidioGanador === false)
+	{
+		for(let i = 0; i<cantidadCartones;i++)
+		{
+			let numsCorrectos = 0;
+			for(let j = 0;j<cartonesComprobar[0].length;j++)
+			{
+				let numeroSacado = randomizar(maximo, 1);
+				if(numeroSacado === cartonesComprobar[i][j]) //hace valores null
+				{
+					cartonesComprobar[i][j] = null;
+				}
+
+				if(cartonesComprobar[i][j] === null)
+				{
+					numsCorrectos++;
+				}
+				if(numsCorrectos === cartonesComprobar[0].length)
+				{
+					cartonGanador = cartones[i][0];
+					res.status(200).json({carton : cartonGanador});
+					seDecidioGanador = true;
+					return;
+				}
+			}
+		}
+	}
+});
+
+
+
 
 app.listen(PORT, function(err){
 	if (err) console.log(err);
